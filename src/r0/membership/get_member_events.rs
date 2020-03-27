@@ -1,4 +1,4 @@
-//! [GET /_matrix/client/r0/rooms/{roomId}/members](https://matrix.org/docs/spec/client_server/r0.4.0.html#get-matrix-client-r0-rooms-roomid-members)
+//! [GET /_matrix/client/r0/rooms/{roomId}/members](https://matrix.org/docs/spec/client_server/r0.6.0#get-matrix-client-r0-rooms-roomid-members)
 
 use ruma_api::ruma_api;
 use ruma_events::{room::member::MemberEvent, EventResult};
@@ -51,20 +51,14 @@ ruma_api! {
 
 /// The kind of membership events to filter for.
 #[derive(Clone, Copy, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "lowercase")]
 pub enum MembershipEventFilter {
     /// The user has joined.
-    #[serde(rename = "join")]
     Join,
-
     /// The user has been invited.
-    #[serde(rename = "invite")]
     Invite,
-
     /// The user has left.
-    #[serde(rename = "leave")]
     Leave,
-
     /// The user has been banned.
-    #[serde(rename = "ban")]
     Ban,
 }
