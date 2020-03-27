@@ -26,18 +26,18 @@ ruma_api! {
         #[ruma_api(query)]
         pub at: Option<String>,
 
-        /// The kind of membership to filter for. Defaults to no filtering if unspecified. When
+        /// The kind of memberships to filter for. Defaults to no filtering if unspecified. When
         /// specified alongside not_membership, the two parameters create an 'or' condition: either
         /// the membership is the same as membership or is not the same as not_membership.
         #[serde(skip_serializing_if = "Option::is_none")]
         #[ruma_api(query)]
-        pub membership: Option<MembershipFilter>,
+        pub membership: Option<MembershipEventFilter>,
 
         /// The kind of memberships to *exclude* from the results. Defaults to no filtering if
         /// unspecified.
         #[serde(skip_serializing_if = "Option::is_none")]
         #[ruma_api(query)]
-        pub not_membership: Option<MembershipFilter>,
+        pub not_membership: Option<MembershipEventFilter>,
     }
 
     response {
@@ -49,9 +49,9 @@ ruma_api! {
     error: crate::Error
 }
 
-/// The kind of membership state of a user to filter for.
+/// The kind of membership events to filter for.
 #[derive(Clone, Copy, Debug, Deserialize, Serialize)]
-pub enum MembershipFilter {
+pub enum MembershipEventFilter {
     /// The user has joined.
     #[serde(rename = "join")]
     Join,
@@ -64,7 +64,7 @@ pub enum MembershipFilter {
     #[serde(rename = "leave")]
     Leave,
 
-    /// The user has is banned.
+    /// The user has been banned.
     #[serde(rename = "ban")]
     Ban,
 }
